@@ -2,12 +2,11 @@ import React from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Paper from '@material-ui/core/Paper';
-
+import foto from './sgig08.jfif';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import InputBase from '@material-ui/core/InputBase';
 import { fade, makeStyles } from '@material-ui/core/styles';
-import SearchIcon from '@material-ui/icons/Search';
 import logo from '../login/logofree.jpg';
 import Drawer from '../drawer/index';
 
@@ -16,15 +15,18 @@ const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
   },
-  menuButton: {
-    marginRight: theme.spacing(2),
-  },
+ 
   title: {
     flexGrow: 1,
     display: 'none',
     [theme.breakpoints.up('sm')]: {
       display: 'block',
     },
+  },
+  logo:{
+    width:'10%',
+    height:'7%',
+    borderRadius:'15px'
   },
   search: {
     position: 'relative',
@@ -72,32 +74,29 @@ const SearchAppBar = () => {
       <>
     <div className={classes.root}>
       <AppBar position="static" width="100%" style={{backgroundColor:'#00E0A6'}}>
-        <Toolbar >
-          <IconButton
+        <Toolbar style={{ padding:'5px'}}>
+        <IconButton
             edge="start"
-            className={classes.menuButton}
             color="inherit"
             aria-label="open drawer"
           >
             <Drawer />
           </IconButton>
+        <div align="start">
+          <img src={foto} className={classes.logo}/>
+
+          </div>
+        
           {/* logo */}
           {/* <Paper style={{width:'300px', borderRadius:'10px', padding:'3px'}}>
            <img alt="logo" src={logo} width='200px'></img>
           </Paper> */}
-          <div className={classes.search}>
-            <div className={classes.searchIcon}>
-              <SearchIcon />
-            </div>
-            <InputBase
-              placeholder="Número de inscrição"
-              classes={{
-                root: classes.inputRoot,
-                input: classes.inputInput,
-              }}
-              inputProps={{ 'aria-label': 'search' }}
-            />
-          </div>
+          {/* <div className={classes.search}>
+            
+
+          </div> */}
+          
+
         </Toolbar>
       </AppBar>
     </div>

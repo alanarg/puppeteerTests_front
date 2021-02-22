@@ -88,7 +88,7 @@ const PesquisaMsAdmin = ()  =>{
     const [buffer, setBuffer] = useState('');
     const [print, setPrint] = useState('');
     const [boo, setBoo] = useState(false);
-    const [border,setBorder] = useState(false);
+    const [validado,setValidado] = useState(true);
     const [resposta, setResposta] = useState(['']);
     let time = null
 
@@ -96,18 +96,19 @@ const PesquisaMsAdmin = ()  =>{
     //  let tgtv =0
     //Simples debounce para a inserção do obejto de entrada
     function handleChange(t){
-        clearTimeout(time)
+        setValidado(true);
+        clearTimeout(time);
          time = setTimeout(()=>{
              try {
                  //validando scopo JSON
                 var obj = JSON.parse(t);
                 var pretty = JSON.stringify(obj, undefined, 1);
                 document.getElementById('myTextArea').value = pretty;
-                 setEnter(t);
+                setEnter(t);
                  console.log(t);         
 
              } catch (error) {
-                 alert("Preencha corretamente os casos de teste");
+                 setValidado(false);
              }
         
 
@@ -156,7 +157,7 @@ const PesquisaMsAdmin = ()  =>{
             //Setta os logs e urls específicas dos casos
             setLogs(resposta[i].logs);
             setUrls(resposta[i].urls);
-            setPrint(`http://localhost:8080/PESQUISAMS_IMAGES/pesquisar_${i}.jpg`);
+            setPrint(resposta[i].print);
         }
 
         return setI(i+1);
@@ -179,10 +180,10 @@ const PesquisaMsAdmin = ()  =>{
                                 <Typography variant="h6" style={{color:"#00E0A6"}} >
                                     Casos de teste <i><b>PESQUISA MS ADMIN</b></i>
                                 </Typography>
-                                <Typography style={{fontSize:"10px", color:"blue"}}>
+                                {validado?null:<Typography style={{fontSize:"10px", color:"red"}}>
                                     Descreva com um JSON os casos de testes
                                     corretamente pontuados
-                                </Typography>
+                                </Typography>}
                                 <TextareaAutosize 
                                     spellCheck={false}
                                     className={classes.textArea}
@@ -191,32 +192,50 @@ const PesquisaMsAdmin = ()  =>{
                                     aria-label="maximum height"
                                     placeholder="JSON de entradas"
                                     defaultValue='{
-                                        "login":{
-                                            "nome":"aarguelho",
-                                        "dominio":"FAZENDA.MS",
-                                        "senha":"Kakashi51!@067",
-                                        "perfil":"(SGI) - Gestor Administrador - Homologação"	
+                                        "login": {
+                                         "nome": "aarguelho",
+                                         "dominio": "FAZENDA.MS",
+                                         "senha": "Kakashi51!@067",
+                                         "perfil": "(DSGI) - Administrador Geral - Desenvolvimento"
                                         },
-                                        "pesquisar":[
-                                            {
-                                                "categoria":"TECNOLOGIA DA INFORMAÇÃO",
-                                                "titulo":"Pesquisa sobre Tecnologia",
-                                                "descricao":"",
-                                                "datainicio":"015/07/2020",
-                                                "datafim":"15/07/2020"
-                                            },
-                                                {
-                                                "categoria":"",
-                                                "titulo":"Pesquisa sobre Tecnologia",
-                                                "descricao":"",
-                                                "datainicio":"",
-                                                "datafim":""
-                                            }
+                                       "categoriaPesquisar":[
+                                           {
+                                               "descricao":"a"
+                                           },
+                                           {
+                                               "descricao":"b"
+                                           }
+                                       ],
+                                        "pesquisar": [
+                                         {
+                                          "categoria": "TECNOLOGIA DA INFORMAÇÃO",
+                                          "titulo": "Pesquisa sobre Tecnologia",
+                                          "descricao": "",
+                                          "datainicio": "015/07/2020",
+                                          "datafim": "15/07/2020"
+                                         },
+                                         {
+                                          "categoria": "",
+                                          "titulo": "Pesquisa sobre Tecnologia",
+                                          "descricao": "",
+                                          "datainicio": "",
+                                          "datafim": ""
+                                         }
+                                        ],
+                                        "cadastrar": [
+                                         {
+                                          "categoria": "TECNOLOGIA DA INFORMAÇÃO",
+                                          "titulo": "Puppeteer teste",
+                                          "descricao": "Puppeteer teste",
+                                          "datainicio": "019/02/2021",
+                                          "datafim": "028/02/2021",
+                                          "nomeresponsavel": "Alan Arguelho",
+                                          "emailresponsavel": "aarguelho@gmail.com",
+                                          "telefone": "9999999009",
+                                          "autenticacao": "false"
+                                         }
                                         ]
-                                        
-                                    
-                                        
-                                    }'
+                                       }'
                                         onChange={e=> e.preventDefault(handleChange(e.target.value))}
                                 />
                                 <Button className={classes.botao} disabled={boo} onClick={handleSubmit}>
@@ -254,7 +273,6 @@ const PesquisaMsAdmin = ()  =>{
                                    
                                 </ul>
                                 <div style={{display:'flex', marginTop:'10px'}}>
-
                                 <DialogU urs={urls} />
                                 <DialogL log={logs}/>
                                 <DialogP  image={print}/>

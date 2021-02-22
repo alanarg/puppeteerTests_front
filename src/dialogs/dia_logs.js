@@ -31,6 +31,7 @@ export default function ResponsiveDialog(props) {
   const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
   const handleClickOpen = () => {
+    console.log(logs);
     setOpen(true);
   };
 
@@ -53,7 +54,7 @@ export default function ResponsiveDialog(props) {
         <DialogContent >
           <DialogContentText className={classes.di_text}>
           <ul>
-                { logs?logs.map(r=>{
+                {logs?logs.map(r=>{
                      return <li><Typography>{r}</Typography></li>;
                 }):null}
             </ul>

@@ -53,12 +53,9 @@ export default function ResponsiveDialog(props) {
         <DialogTitle id="responsive-dialog-title">{"Requests"}</DialogTitle>
         <DialogContent >
           <DialogContentText className={classes.di_text}>
-          <ul>
+            <ul>
                 { urls?urls.map(r=>{
                     console.log(r);
-                  
-                  
-
                      return <li><Typography>{r}</Typography></li>;
                 }):null}
             </ul>
