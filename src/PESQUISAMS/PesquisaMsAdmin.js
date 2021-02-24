@@ -58,8 +58,8 @@ const useStyles = makeStyles(theme =>({
         color:'white',
         borderRadius:'15px',
         overflow: 'hidden',
-        width:'100%',
-        height:'100px'
+        width:'90%',
+        height:'2000px'
 
     },
     tree:{
@@ -187,7 +187,7 @@ const PesquisaMsAdmin = ()  =>{
                                 <TextareaAutosize 
                                     spellCheck={false}
                                     className={classes.textArea}
-                                    rowsMax={14}
+                                    rowsMax={25}
                                     id="myTextArea"
                                     aria-label="maximum height"
                                     placeholder="JSON de entradas"
