@@ -18,6 +18,7 @@ const useStyles = makeStyles(theme =>({
     di_text:{
         width:'100%',
         wordWrap:'break-word',
+        margin:'10px',
         color:'#000000'
     }
 
@@ -27,7 +28,9 @@ export default function ResponsiveDialog(props) {
 
   const [open, setOpen] = React.useState(false);
   const theme = useTheme();
-  const urls = props.urs;
+  const urlsRequest = props.ursreq;
+  const urlsResponse = props.ursres;
+
   const logs = props.log;
   const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
@@ -52,11 +55,21 @@ export default function ResponsiveDialog(props) {
       >
         <DialogTitle id="responsive-dialog-title">{"Requests"}</DialogTitle>
         <DialogContent >
+          <h1>Requests</h1>
           <DialogContentText className={classes.di_text}>
             <ul>
-                { urls?urls.map(r=>{
-                    console.log(r);
-                     return <li><Typography>{r}</Typography></li>;
+                { urlsRequest?urlsRequest.map(r=>{
+                     return <li><Typography>{r.url}</Typography></li>;
+                }):null}
+            </ul>
+          </DialogContentText>
+        </DialogContent>
+        <DialogContent >
+          <h1>Responses</h1>
+          <DialogContentText className={classes.di_text}>
+            <ul>
+                { urlsResponse?urlsResponse.map(r=>{
+                     return <li><Typography><b>URL:</b>{r.url}<br></br><b>Status:</b>{r.status}</Typography></li>
                 }):null}
             </ul>
           </DialogContentText>

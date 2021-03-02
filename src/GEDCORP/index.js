@@ -1,12 +1,11 @@
 import React, {useState } from 'react';
 import SearchAppBar from '../Appbar/index';
-import {Grid,Paper, Typography, TextareaAutosize, Button, Chip} from '@material-ui/core';
+import {Grid,Paper, Typography, TextareaAutosize, Button, Chip,Checkbox,FormControlLabel} from '@material-ui/core';
 import {makeStyles} from '@material-ui/core/styles';
 import api from '../services/api';
-import Report from '../PDFmaker/index';
-import ReportView from '../PDFmaker/index';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Tabela from '../tabela/index';
+import LiveButton from '../LiveButton/index';
 import fs from 'fs';
 
 import DialogP from '../dialogs/dia_print';
@@ -34,7 +33,6 @@ const useStyles = makeStyles(theme =>({
         marginLeft: theme.spacing(5),
         marginTop: theme.spacing(5),
 
-
     },
     paper2:{
 
@@ -46,7 +44,7 @@ const useStyles = makeStyles(theme =>({
     botao:{
         backgroundColor:'#00E0A6', 
         color:'#FFFFFF',
-        marginTop:'10px'
+        margin:'10px'
     },
     container:{
         width:'100%'
@@ -82,12 +80,16 @@ const  Main = ()  =>{
     const classes = useStyles();
     const [enter, setEnter] = useState("");
     const [status, setStatus] = useState("");
-    const [urls, setUrls] = useState(['']);
+    const [urlsreq, setUrlsreq] = useState(['']);
+    const [urlsres, setUrlsres] = useState(['']);
     const [logs, setLogs] = useState(['']);
     const [i, setI] = useState(0);
+    const [editing, setEditing] = useState(false);
     const [buffer, setBuffer] = useState('');
     const [print, setPrint] = useState('');
+    const [validado,setValidado] = useState(true);
     const [boo, setBoo] = useState(false);
+    const [checked,setChecked] = useState(false);
     const [resposta, setResposta] = useState(['']);
     let time = null
 
@@ -95,6 +97,9 @@ const  Main = ()  =>{
     //  let tgtv =0
     //Simples debounce para a inserção do obejto de entrada
     function handleChange(t){
+        setValidado(true);
+        setEditing(true);
+
         clearTimeout(time)
          time = setTimeout(()=>{
             try {
@@ -102,18 +107,21 @@ const  Main = ()  =>{
                var obj = JSON.parse(t);
                var pretty = JSON.stringify(obj, undefined, 1);
                document.getElementById('myTextArea').value = pretty;
-                setEnter(t);
-                console.log(t);         
+               setEnter(t);
+               setEditing(false);
+                // console.log(t);         
 
             } catch (error) {
-                alert("Preencha corretamente os casos de teste");
+                setValidado(false);
             }
        
             }, 2000);
     }
 
+
     //Faz a requisição da API rodando puppeteer
     async function handleSubmit(){
+        
         try{
             //variável para loading
             setBoo(true);
@@ -129,7 +137,6 @@ const  Main = ()  =>{
 
                 return setResposta(re);
 
-
             });
 
         }catch(error){
@@ -138,7 +145,6 @@ const  Main = ()  =>{
             console.log(error);
 
         }
-
 
     }
 
@@ -150,15 +156,19 @@ const  Main = ()  =>{
             console.log('ii');
             //Setta os logs e urls específicas dos casos
             setLogs(resposta[i].logs);
-            setUrls(resposta[i].urls);
+            setUrlsreq(resposta[i].urlsRequest);
+            setUrlsres(resposta[i].urlsResponse);
+
             setPrint(resposta[i].print);
         }
 
         return setI(i+1);
 
     }
-
-    
+    // Visualizar teste no navegador
+    function handleChangeCheck(){
+        setChecked(!checked);
+    }
 
     return (
         <> 
@@ -174,10 +184,15 @@ const  Main = ()  =>{
                                 <Typography variant="h6" style={{color:"#00E0A6"}}>
                                     Casos de teste <i><b>GEDCORP PUBLICO</b></i>
                                 </Typography>
-                                <Typography style={{fontSize:"10px", color:"blue"}}>
+                                {validado?null:<Typography style={{fontSize:"10px", color:"red"}}>
                                     Descreva com um JSON os casos de testes
                                     corretamente pontuados
-                                </Typography>
+                                </Typography>}
+                                {editing?<Typography style={{fontSize:"10px", color:"green"}}>
+                                    editando...
+                                </Typography>:<Typography style={{fontSize:"10px", color:"blue"}}>
+                                    pronto!
+                                </Typography>}
                                 <TextareaAutosize 
                                     spellCheck={false}
                                     className={classes.textArea}
@@ -185,26 +200,50 @@ const  Main = ()  =>{
                                     id="myTextArea"
                                     aria-label="maximum height"
                                     placeholder="JSON de entradas"
-                                    defaultValue=' [{   
-                                            "nome":"PORTARIA",
-                                            "tipo_documento":"ANEXO",
-                                            "numero":"12",
-                                            "data":"002/12/2010",
-                                            "assunto":"aaaa",
-                                            "resumo":"bbb",
-                                            "texto_do_documento":"ccc"
-                                        }]'
+                                    defaultValue=' 
+                                    {
+                                    "visualizarTeste":false,
+                                    "casos":[
+                                        {
+                                            "nome": "PORTARIA",
+                                            "tipo_documento": "",
+                                            "numero": "",
+                                            "data": "",
+                                            "assunto": "",
+                                            "resumo": "",
+                                            "texto_do_documento": ""
+                                           }     
+                                        ]
+                                    }'
                                         onChange={e=> e.preventDefault(handleChange(e.target.value))}
                                 />
-                                <Button className={classes.botao} disabled={boo} onClick={handleSubmit}>
-                                    Testar {boo?<CircularProgress style={{color:'white'}}/>:null}
-                                </Button>
-                                <Button style={{width:'50px', backgroundColor:'#c1c1c1', height:'25px', marginLeft:'50px'}}  onClick={handleCase}>
-                                    next
-                                </Button>
+                                    <div style={{display:'flex'}}>
 
+                                {status?null:<Button className={classes.botao} disabled={boo} onClick={handleSubmit}>
+                                    Testar 
+                                {boo?<CircularProgress style={{color:'white', display:'fixed'}} />:null}
+
+                                </Button>}
+                                {/* <FormControlLabel
+                                  control={
+                                    <Checkbox
+                                      checked={checked}
+                                      onChange={handleChangeCheck}
+                                      name="checkedB"
+                                      style={{color:'#00E0A6'}}
+                                    />
+                                  }
+                                  label="Visualizar teste no navegador"
+                                /> */}
+                                
+                                {status?<Button className={classes.botao}  onClick={handleCase}>
+                                    Visualizar caso =>{i}/{resposta.length}
+                                </Button>:null}
+                                {status?<Button style={{color:'blue', fontSize:'10px', width:'100px'}} onClick={()=>{ window.location.reload(false);}}>
+                                    Testar novamente ...
+                                </Button>:null}
+                                </div>
                                 </Grid>
-
                                 <Grid item xs={8}>
                                 <Typography variant="h12" >
                                     functions: <Chip label="Pesquisar"></Chip>
@@ -223,7 +262,7 @@ const  Main = ()  =>{
                                 </ul>
                                 <div style={{display:'flex', marginTop:'10px'}}>
 
-                                <DialogU urs={urls} />
+                                <DialogU ursreq={urlsreq} ursres={urlsres} />
                                 <DialogL log={logs}/>
                                 <DialogP  image={print}/>
 

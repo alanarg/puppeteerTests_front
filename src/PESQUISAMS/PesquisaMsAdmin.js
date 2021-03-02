@@ -46,7 +46,7 @@ const useStyles = makeStyles(theme =>({
     botao:{
         backgroundColor:'#00E0A6', 
         color:'#FFFFFF',
-        marginTop:'10px'
+        margin:'10px'
     },
     container:{
         width:'100%'
@@ -117,9 +117,6 @@ const PesquisaMsAdmin = ()  =>{
 
     //Faz a requisição da API rodando puppeteer
     async function handleSubmit(){
-
-
-
         console.log(enter);
         try{
             //variável para loading
@@ -192,6 +189,7 @@ const PesquisaMsAdmin = ()  =>{
                                     aria-label="maximum height"
                                     placeholder="JSON de entradas"
                                     defaultValue='{
+                                        "visualizarTeste":false,
                                         "login": {
                                          "nome": "aarguelho",
                                          "dominio": "FAZENDA.MS",
@@ -238,13 +236,18 @@ const PesquisaMsAdmin = ()  =>{
                                        }'
                                         onChange={e=> e.preventDefault(handleChange(e.target.value))}
                                 />
+                                 <div style={{display:'flex'}}>
+
                                 <Button className={classes.botao} disabled={boo} onClick={handleSubmit}>
-                                    Testar {boo?<CircularProgress style={{color:'white'}}/>:null}
-                                </Button>
-                                <Button style={{width:'50px', backgroundColor:'#c1c1c1', height:'25px', marginLeft:'50px'}}  onClick={handleCase}>
-                                    next
+                                    Testar 
+                                    {boo?<CircularProgress style={{color:'white', display:'fixed'}} />:null}
+
                                 </Button>
 
+                                <Button className={classes.botao}  onClick={handleCase}>
+                                    next
+                                </Button>
+                                </div>
                                 </Grid>
 
                                 <Grid item xs={8}>
