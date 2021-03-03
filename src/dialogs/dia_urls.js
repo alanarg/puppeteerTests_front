@@ -31,7 +31,6 @@ export default function ResponsiveDialog(props) {
   const urlsRequest = props.ursreq;
   const urlsResponse = props.ursres;
 
-  const logs = props.log;
   const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
   const handleClickOpen = () => {

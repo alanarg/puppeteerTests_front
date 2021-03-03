@@ -1,13 +1,9 @@
 import React from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import Paper from '@material-ui/core/Paper';
 import foto from './sgig08.jfif';
 import IconButton from '@material-ui/core/IconButton';
-import Typography from '@material-ui/core/Typography';
-import InputBase from '@material-ui/core/InputBase';
 import { fade, makeStyles } from '@material-ui/core/styles';
-import logo from '../login/logofree.jpg';
 import Drawer from '../drawer/index';
 
 
@@ -83,7 +79,7 @@ const SearchAppBar = () => {
             <Drawer />
           </IconButton>
         <div align="start">
-          <img src={foto} className={classes.logo}/>
+          <img src={foto} alt="" className={classes.logo}/>
 
           </div>
         

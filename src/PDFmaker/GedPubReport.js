@@ -17,7 +17,6 @@ const styles = StyleSheet.create({
 
 // Create Document Component
 const MyDocument = (props) => {
-    const res = props.dados;
 
     return(
         <Document>

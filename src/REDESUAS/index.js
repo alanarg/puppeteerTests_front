@@ -3,12 +3,7 @@ import SearchAppBar from '../Appbar/index';
 import {Grid,Paper, Typography, TextareaAutosize, Button, Chip} from '@material-ui/core';
 import {makeStyles} from '@material-ui/core/styles';
 import api from '../services/api';
-import Report from '../PDFmaker/index';
-import ReportView from '../PDFmaker/index';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import Tabela from '../tabela/index';
-import fs from 'fs';
-
 import DialogP from '../dialogs/dia_print';
 import DialogU from '../dialogs/dia_urls';
 import DialogL from '../dialogs/dia_logs';
@@ -85,7 +80,6 @@ const  Main = ()  =>{
     const [urls, setUrls] = useState(['']);
     const [logs, setLogs] = useState(['']);
     const [i, setI] = useState(0);
-    const [buffer, setBuffer] = useState('');
     const [print, setPrint] = useState('');
     const [boo, setBoo] = useState(false);
     const [resposta, setResposta] = useState(['']);

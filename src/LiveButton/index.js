@@ -11,7 +11,6 @@ const useStyles = makeStyles({
 });
 
 const LiveButton = () =>{
-  const classes = useStyles();
   const [checked,setChecked] = useState(false);
 
   function handleChange(){

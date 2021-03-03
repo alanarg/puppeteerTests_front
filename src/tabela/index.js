@@ -1,9 +1,9 @@
-import React,{useState, useEffect} from 'react';
+import React from 'react';
 import MuiExpansionPanel from '@material-ui/core/ExpansionPanel';
 import MuiExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import MuiExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
-import {Button,CircularProgress, Grid, Slider} from '@material-ui/core';
-import {makeStyles, withStyles } from '@material-ui/core/styles';
+import { Grid} from '@material-ui/core';
+import {withStyles } from '@material-ui/core/styles';
 
 
   

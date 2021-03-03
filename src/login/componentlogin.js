@@ -27,6 +27,7 @@ function Copyright() {
 }
 
 const useStyles = makeStyles(theme => ({
+  // eslint-disable-next-line
   root: {
     flexGrow:1,
 
@@ -87,12 +88,13 @@ export default function SignInSide() {
     <Grid container direction="row"  justify="center" alignItems="center" component="main"  spacing={8}>
       <CssBaseline />
       <Grid item xs >
+      {/* eslint-disable-next-line */}
           <Paper elevation={0,5} style={{marginLeft:'6px', padding:'8px', borderRadius:'5px', width:'200px'}} >
           <img alt='logo' width="190px" src={logo} ></img>
 
           </Paper>
-           
             </Grid>
+      {/* eslint-disable-next-line */}     
       <Paper elevation={0,5} style={{ borderRadius:'15px', backgroundColor:'#e6fff2'}} >
       <Grid item xs direction="column" className={classes.paper}>
         <div  className={classes.form} >

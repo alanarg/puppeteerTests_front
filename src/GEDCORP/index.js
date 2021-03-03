@@ -1,13 +1,9 @@
 import React, {useState } from 'react';
 import SearchAppBar from '../Appbar/index';
-import {Grid,Paper, Typography, TextareaAutosize, Button, Chip,Checkbox,FormControlLabel} from '@material-ui/core';
+import {Grid,Paper, Typography, TextareaAutosize, Button, Chip} from '@material-ui/core';
 import {makeStyles} from '@material-ui/core/styles';
 import api from '../services/api';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import Tabela from '../tabela/index';
-import LiveButton from '../LiveButton/index';
-import fs from 'fs';
-
 import DialogP from '../dialogs/dia_print';
 import DialogU from '../dialogs/dia_urls';
 import DialogL from '../dialogs/dia_logs';
@@ -85,11 +81,9 @@ const  Main = ()  =>{
     const [logs, setLogs] = useState(['']);
     const [i, setI] = useState(0);
     const [editing, setEditing] = useState(false);
-    const [buffer, setBuffer] = useState('');
     const [print, setPrint] = useState('');
     const [validado,setValidado] = useState(true);
     const [boo, setBoo] = useState(false);
-    const [checked,setChecked] = useState(false);
     const [resposta, setResposta] = useState(['']);
     let time = null
 
@@ -165,10 +159,7 @@ const  Main = ()  =>{
         return setI(i+1);
 
     }
-    // Visualizar teste no navegador
-    function handleChangeCheck(){
-        setChecked(!checked);
-    }
+    
 
     return (
         <> 
@@ -202,6 +193,7 @@ const  Main = ()  =>{
                                     placeholder="JSON de entradas"
                                     defaultValue=' 
                                     {
+                                    "ambiente":"hom.",
                                     "visualizarTeste":false,
                                     "casos":[
                                         {
