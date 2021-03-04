@@ -193,7 +193,7 @@ const  Main = ()  =>{
                                     placeholder="JSON de entradas"
                                     defaultValue=' 
                                     {
-                                    "ambiente":"hom.",
+                                    "ambiente":"hom.gedcorp.ms.gov.br",
                                     "visualizarTeste":false,
                                     "casos":[
                                         {
