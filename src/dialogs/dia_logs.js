@@ -40,9 +40,11 @@ export default function ResponsiveDialog(props) {
 
   return (
     <div>
-      <Button variant="outlined" style={{color:'#00E0A6', borderColor:'#00E0A6'}} onClick={handleClickOpen}>
+      <div>
+      <Button variant="outlined" style={{display:'flex',color:'#00E0A6', borderColor:'#00E0A6'}} onClick={handleClickOpen}>
         Console Content
       </Button>
+      </div>
       <Dialog
         fullScreen={fullScreen}
         open={open}

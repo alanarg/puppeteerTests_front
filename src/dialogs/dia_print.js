@@ -24,9 +24,11 @@ export default function ResponsiveDialog(props) {
   
   return (
     <div>
+      <div>
       <Button variant="outlined" style={{color:'#00E0A6', borderColor:'#00E0A6'}} onClick={handleClickOpen}>
         Print 
       </Button>
+      </div>
       <Dialog
         fullScreen={fullScreen}
         open={open}

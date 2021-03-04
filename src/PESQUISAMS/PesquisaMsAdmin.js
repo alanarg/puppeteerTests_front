@@ -165,7 +165,7 @@ const PesquisaMsAdmin = ()  =>{
                     <Grid container direction="column" alignItems="baseline" justify="center" spacing={-1}>
                         <Grid item xs={12} spacing={1} >
                             <Paper className={classes.paper} elevation={20}>
-                            <Grid container className={classes.container} alignItems="flex-right" spacing={2}>
+                            <Grid container className={classes.container} direction="flex-grow" alignItems="baseline" >
                             
                                 <Grid item xs={4}>
                                 <Typography variant="h6" style={{color:"#00E0A6"}} >
@@ -270,19 +270,37 @@ const PesquisaMsAdmin = ()  =>{
                                     </li>
                                    
                                 </ul>
-                                <div style={{display:'flex', marginTop:'10px'}}>
-                                <DialogU urs={urls} />
-                                <DialogL log={logs}/>
-                                <DialogP  image={print}/>
-
+                                
+                                <div>
+                                    
                                 </div>
-                                
-                                   
+                                <Grid
+                                  container
+                                  direction="column"
+                                  justify="center"
+                                  alignItems="flex-start"
+                                >
+                                    <Grid item>
+                                <DialogU urs={urls} />
+
+                                    </Grid>
+                                    <Grid item></Grid>
+                                <DialogL log={logs}/>
+
+                                  </Grid>
+                                  <Grid item>
+                                <DialogP  image={print}/>
+                                       
+                                  </Grid>
                                 </Grid>
-                                
+
+                               
                             </Grid>
-                            
+                           
                             </Paper>
+                              
+
+
                         </Grid>
                         <Grid item xs={12}>
                             <Paper className={classes.paper} elevation={20}>

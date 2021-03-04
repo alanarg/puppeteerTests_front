@@ -43,9 +43,11 @@ export default function ResponsiveDialog(props) {
 
   return (
     <div>
-      <Button variant="outlined" style={{color:'#00E0A6', borderColor:'#00E0A6'}} onClick={handleClickOpen}>
+      <div>   
+      <Button variant="outlined" style={{color:'#00E0A6',  borderColor:'#00E0A6'}} onClick={handleClickOpen}>
         URLs Requisitadas
       </Button>
+      </div>
       <Dialog
         fullScreen={fullScreen}
         open={open}
