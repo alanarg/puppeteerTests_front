@@ -259,39 +259,24 @@ const  Main = ()  =>{
                                   alignItems="flex-start"
                                 >
                                     <Grid item>
-                                    <DialogU ursreq={urlsreq} ursres={urlsres} />
-
-
+                                        <DialogU ursreq={urlsreq} ursres={urlsres} />
                                     </Grid>
                                     <Grid item></Grid>
-                                    <DialogL log={logs}/>
-
-
-                                  </Grid>
-                                  <Grid item>
-                                  <DialogP  image={print}/>
-
-                                       
-                                  </Grid>
-
-                                
-                                   
+                                        <DialogL log={logs}/>
+                                    </Grid>
+                                    <Grid item>
+                                        <DialogP  image={print}/>      
+                                    </Grid>                         
                                 </Grid>
-                                
                             </Grid>
-                            
                             </Paper>
                         </Grid>
                         <Grid item xs={12}>
                             <Paper className={classes.paper} elevation={20}>
                             <Grid container className={classes.container} alignItems="flex-right" spacing={2}>
-                            
-                            
-
                         </Grid>
                             </Paper>    
                         </Grid>
-
                     </Grid>
                     </div>
                     

@@ -77,13 +77,15 @@ const PesquisaMsAdmin = ()  =>{
     const classes = useStyles();
     const [enter, setEnter] = useState("");
     const [status, setStatus] = useState("");
-    const [urls, setUrls] = useState(['']);
     const [logs, setLogs] = useState(['']);
     const [i, setI] = useState(0);
     const [print, setPrint] = useState('');
+    const [urlsreq, setUrlsreq] = useState(['']);
+    const [urlsres, setUrlsres] = useState(['']);
     const [boo, setBoo] = useState(false);
     const [validado,setValidado] = useState(true);
     const [resposta, setResposta] = useState(['']);
+    const [editing, setEditing] = useState(false);
     let time = null
 
 
@@ -91,6 +93,9 @@ const PesquisaMsAdmin = ()  =>{
     //Simples debounce para a inserção do obejto de entrada
     function handleChange(t){
         setValidado(true);
+        //Altera variavel para dizer q esta editando
+        setEditing(true);
+
         clearTimeout(time);
          time = setTimeout(()=>{
              try {
@@ -99,7 +104,10 @@ const PesquisaMsAdmin = ()  =>{
                 var pretty = JSON.stringify(obj, undefined, 1);
                 document.getElementById('myTextArea').value = pretty;
                 setEnter(t);
-                 console.log(t);         
+                 console.log(t);
+                 //Não está mais editando     
+                setEditing(false);
+
 
              } catch (error) {
                  setValidado(false);
@@ -147,7 +155,8 @@ const PesquisaMsAdmin = ()  =>{
         if(i<resposta.length){
             //Setta os logs e urls específicas dos casos
             setLogs(resposta[i].logs);
-            setUrls(resposta[i].urls);
+            setUrlsreq(resposta[i].urlsRequest);
+            setUrlsres(resposta[i].urlsResponse);
             setPrint(resposta[i].print);
         }
 
@@ -174,6 +183,12 @@ const PesquisaMsAdmin = ()  =>{
                                 {validado?null:<Typography style={{fontSize:"10px", color:"red"}}>
                                     Descreva com um JSON os casos de testes
                                     corretamente pontuados
+                                </Typography>}
+                                {/* aidcionando "editing" */}
+                                {editing?<Typography style={{fontSize:"10px", color:"green"}}>
+                                    editando...
+                                </Typography>:<Typography style={{fontSize:"10px", color:"blue"}}>
+                                    pronto!
                                 </Typography>}
                                 <TextareaAutosize 
                                     spellCheck={false}
@@ -215,7 +230,7 @@ const PesquisaMsAdmin = ()  =>{
                                           "datafim": ""
                                          }
                                         ],
-                                        "cadastrar": [
+                                        "cadastrarPesquisa": [
                                          {
                                           "categoria": "TECNOLOGIA DA INFORMAÇÃO",
                                           "titulo": "Puppeteer teste",
@@ -227,21 +242,63 @@ const PesquisaMsAdmin = ()  =>{
                                           "telefone": "9999999009",
                                           "autenticacao": "false"
                                          }
+                                        ],
+                                        "cadastrarCategoria":[
+                                            {
+                                            "descricao":"banner_teste"
+                                            }
+                                        ],
+                                        "cadastrarBanner":[{
+                                            "nome":"ativo",
+                                            "ativo":"ativo",
+                                            "principal":"sim"
+                                            }
+                                        ],
+                                        "editarPesquisa":[
+                                            {
+                                                "id":"120",
+                                                "categoria": "SAÚDE",
+                                              "titulo": "Puppe",
+                                               "objetivo": "Puppeteer teste",
+                                               "datainicio": "19/02/20210",
+                                               "datafim": "28/02/20210",
+                                               "nomeresponsavel": "Alan Arguelho",
+                                               "emailresponsavel": "aarguelho@gmail.com",
+                                               "telefone": "9999999009",
+                                               "autenticacao": "false"
+                                            }
+                                        ],
+                                        "criarSecao":[{
+                                            "id":"120",
+                                            "descricao":"null",
+                                            "ordem":"2"
+                                        }],
+                                        "criarPergunta":[
+                                            {
+                                                "id":"120",
+                                                "descricao":"null",
+                                                "tipoPergunta":"Intensidade",
+                                                "ordem":"2",
+                                                "obrigatorio":"true"
+                                                
+                                            }
                                         ]
                                        }'
                                         onChange={e=> e.preventDefault(handleChange(e.target.value))}
                                 />
                                  <div style={{display:'flex'}}>
 
-                                <Button className={classes.botao} disabled={boo} onClick={handleSubmit}>
+                                 {status?null:<Button className={classes.botao} disabled={boo} onClick={handleSubmit}>
                                     Testar 
-                                    {boo?<CircularProgress style={{color:'white', display:'fixed'}} />:null}
+                                {boo?<CircularProgress style={{color:'white', display:'fixed'}} />:null}
 
-                                </Button>
-
-                                <Button className={classes.botao}  onClick={handleCase}>
-                                    next
-                                </Button>
+                                </Button>}
+                                {status?<Button className={classes.botao}  onClick={handleCase}>
+                                    Visualizar caso =>{i}/{resposta.length}
+                                </Button>:null}
+                                {status?<Button style={{color:'blue', fontSize:'10px', width:'100px'}} onClick={()=>{ window.location.reload(false);}}>
+                                    Testar novamente ...
+                                </Button>:null}
                                 </div>
                                 </Grid>
 
@@ -281,7 +338,7 @@ const PesquisaMsAdmin = ()  =>{
                                   alignItems="flex-start"
                                 >
                                     <Grid item>
-                                <DialogU urs={urls} />
+                                <DialogU ursreq={urlsreq} ursres={urlsres} />
 
                                     </Grid>
                                     <Grid item></Grid>
