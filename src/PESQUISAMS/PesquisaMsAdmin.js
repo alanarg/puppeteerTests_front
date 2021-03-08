@@ -79,6 +79,7 @@ const PesquisaMsAdmin = ()  =>{
     const [status, setStatus] = useState("");
     const [logs, setLogs] = useState(['']);
     const [i, setI] = useState(0);
+    
     const [print, setPrint] = useState('');
     const [urlsreq, setUrlsreq] = useState(['']);
     const [urlsres, setUrlsres] = useState(['']);
@@ -93,19 +94,26 @@ const PesquisaMsAdmin = ()  =>{
     //Simples debounce para a inserção do obejto de entrada
     function handleChange(t){
         setValidado(true);
+        try {
+                 //validando scopo JSON
+                 var obj = JSON.parse(t);
+                 var pretty = JSON.stringify(obj, undefined, 1);
+                 document.getElementById('myTextArea').value = pretty;    
+        } catch (error) {
+                 setValidado(false);
+                    
+        }
+
         //Altera variavel para dizer q esta editando
         setEditing(true);
 
         clearTimeout(time);
          time = setTimeout(()=>{
              try {
-                 //validando scopo JSON
-                var obj = JSON.parse(t);
-                var pretty = JSON.stringify(obj, undefined, 1);
-                document.getElementById('myTextArea').value = pretty;
                 setEnter(t);
-                 console.log(t);
-                 //Não está mais editando     
+
+                console.log(t);
+                //Não está mais editando     
                 setEditing(false);
 
 
@@ -114,7 +122,7 @@ const PesquisaMsAdmin = ()  =>{
              }
         
 
-            }, 1000);
+            }, 5000);
     }
 
     //Faz a requisição da API rodando puppeteer
@@ -163,8 +171,6 @@ const PesquisaMsAdmin = ()  =>{
         return setI(i+1);
 
     }
-
-    
 
     return (
         <> 
@@ -273,15 +279,24 @@ const PesquisaMsAdmin = ()  =>{
                                             "descricao":"null",
                                             "ordem":"2"
                                         }],
-                                        "criarPergunta":[
-                                            {
+                                        "criarPergunta":[{
+                                            "pergunta":{
                                                 "id":"120",
                                                 "descricao":"null",
                                                 "tipoPergunta":"Intensidade",
                                                 "ordem":"2",
                                                 "obrigatorio":"true"
                                                 
+                                            },
+                                            "alternativas":{
+
+                                                "descricao":"",
+                                                "ordem":"",
+                                                "outros":""
+ 
                                             }
+                                        }
+                                            
                                         ]
                                        }'
                                         onChange={e=> e.preventDefault(handleChange(e.target.value))}
@@ -296,9 +311,9 @@ const PesquisaMsAdmin = ()  =>{
                                 {status?<Button className={classes.botao}  onClick={handleCase}>
                                     Visualizar caso =>{i}/{resposta.length}
                                 </Button>:null}
-                                {status?<Button style={{color:'blue', fontSize:'10px', width:'100px'}} onClick={()=>{ window.location.reload(false);}}>
+                                {status?<a href="/PESQUISAMS_ADMIN" style={{color:'blue', fontSize:'10px', width:'100px'}} onClick={()=>{ window.location.reload(false);}}>
                                     Testar novamente ...
-                                </Button>:null}
+                                </a>:null}
                                 </div>
                                 </Grid>
 

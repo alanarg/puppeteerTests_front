@@ -1,4 +1,4 @@
-import React, {useState } from 'react';
+import React, {useState} from 'react';
 import SearchAppBar from '../Appbar/index';
 import {Grid,Paper, Typography, TextareaAutosize, Button, Chip} from '@material-ui/core';
 import {makeStyles} from '@material-ui/core/styles';
@@ -94,13 +94,22 @@ const  Main = ()  =>{
         setValidado(true);
         setEditing(true);
 
+        try {
+            //validando scopo JSON
+            var obj = JSON.parse(t);
+            var pretty = JSON.stringify(obj, undefined, 1);
+            document.getElementById('myTextArea').value = pretty;            
+        } catch (error) {
+
+            setValidado(false);
+            
+        }
+
+
         clearTimeout(time)
          time = setTimeout(()=>{
             try {
-                //validando scopo JSON
-               var obj = JSON.parse(t);
-               var pretty = JSON.stringify(obj, undefined, 1);
-               document.getElementById('myTextArea').value = pretty;
+                
                setEnter(t);
                setEditing(false);
                 // console.log(t);         
@@ -216,24 +225,13 @@ const  Main = ()  =>{
                                 {boo?<CircularProgress style={{color:'white', display:'fixed'}} />:null}
 
                                 </Button>}
-                                {/* <FormControlLabel
-                                  control={
-                                    <Checkbox
-                                      checked={checked}
-                                      onChange={handleChangeCheck}
-                                      name="checkedB"
-                                      style={{color:'#00E0A6'}}
-                                    />
-                                  }
-                                  label="Visualizar teste no navegador"
-                                /> */}
-                                
+                               
                                 {status?<Button className={classes.botao}  onClick={handleCase}>
                                     Visualizar caso =>{i}/{resposta.length}
                                 </Button>:null}
-                                {status?<Button style={{color:'blue', fontSize:'10px', width:'100px'}} onClick={()=>{ window.location.reload(false);}}>
+                                {status?<a href="/" style={{color:'blue', fontSize:'10px', width:'100px'}} >
                                     Testar novamente ...
-                                </Button>:null}
+                                </a>:null}
                                 </div>
                                 </Grid>
                                 <Grid item xs={8}>
