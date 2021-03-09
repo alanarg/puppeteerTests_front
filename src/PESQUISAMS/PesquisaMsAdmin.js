@@ -51,8 +51,8 @@ const useStyles = makeStyles(theme =>({
         borderColor:'#00E0A6',
         background:'#363636',
         color:'white',
-        borderRadius:'15px',
-        overflow: 'hidden',
+        borderRadius:'5px',
+        overflow: 'visible',
         width:'90%',
         height:'2000px'
 
@@ -204,22 +204,22 @@ const PesquisaMsAdmin = ()  =>{
                                     aria-label="maximum height"
                                     placeholder="JSON de entradas"
                                     defaultValue='{
-                                        "ambiente":"localhost:4200",
-                                        "visualizarTeste":false,
+                                        "ambiente": "localhost:4200",
+                                        "visualizarTeste": true,
                                         "login": {
                                          "nome": "",
                                          "dominio": "FAZENDA.MS",
                                          "senha": "",
                                          "perfil": "(DSGI) - Administrador Geral - Desenvolvimento"
                                         },
-                                       "categoriaPesquisar":[
-                                           {
-                                               "descricao":"a"
-                                           },
-                                           {
-                                               "descricao":"b"
-                                           }
-                                       ],
+                                        "categoriaPesquisar": [
+                                         {
+                                          "descricao": "a"
+                                         },
+                                         {
+                                          "descricao": "b"
+                                         }
+                                        ],
                                         "pesquisar": [
                                          {
                                           "categoria": "TECNOLOGIA DA INFORMAÇÃO",
@@ -249,54 +249,55 @@ const PesquisaMsAdmin = ()  =>{
                                           "autenticacao": "false"
                                          }
                                         ],
-                                        "cadastrarCategoria":[
-                                            {
-                                            "descricao":"banner_teste"
-                                            }
+                                        "cadastrarCategoria": [
+                                         {
+                                          "descricao": "banner_teste"
+                                         }
                                         ],
-                                        "cadastrarBanner":[{
-                                            "nome":"ativo",
-                                            "ativo":"ativo",
-                                            "principal":"sim"
-                                            }
+                                        "cadastrarBanner": [
+                                         {
+                                          "nome": "ativo",
+                                          "ativo": "ativo",
+                                          "principal": "sim"
+                                         }
                                         ],
-                                        "editarPesquisa":[
-                                            {
-                                                "id":"120",
-                                                "categoria": "SAÚDE",
-                                              "titulo": "Puppe",
-                                               "objetivo": "Puppeteer teste",
-                                               "datainicio": "19/02/20210",
-                                               "datafim": "28/02/20210",
-                                               "nomeresponsavel": "Alan Arguelho",
-                                               "emailresponsavel": "aarguelho@gmail.com",
-                                               "telefone": "9999999009",
-                                               "autenticacao": "false"
-                                            }
+                                        "editarPesquisa": [
+                                         {
+                                          "id": "120",
+                                          "categoria": "SAÚDE",
+                                          "titulo": "Puppe",
+                                          "objetivo": "Puppeteer teste",
+                                          "datainicio": "19/02/20210",
+                                          "datafim": "28/02/20210",
+                                          "nomeresponsavel": "Alan Arguelho",
+                                          "emailresponsavel": "aarguelho@gmail.com",
+                                          "telefone": "9999999009",
+                                          "autenticacao": "false",
+                                          "comsecao": "true"
+                                         }
                                         ],
-                                        "criarSecao":[{
-                                            "id":"120",
-                                            "descricao":"null",
-                                            "ordem":"2"
-                                        }],
-                                        "criarPergunta":[{
-                                            "pergunta":{
-                                                "id":"120",
-                                                "descricao":"null",
-                                                "tipoPergunta":"Intensidade",
-                                                "ordem":"2",
-                                                "obrigatorio":"true"
-                                                
-                                            },
-                                            "alternativas":{
-
-                                                "descricao":"",
-                                                "ordem":"",
-                                                "outros":""
- 
-                                            }
-                                        }
-                                            
+                                        "criarSecao": [
+                                         {
+                                          "id": "120",
+                                          "descricao": "null",
+                                          "ordem": "2"
+                                         }
+                                        ],
+                                        "criarPergunta": [],
+                                        "criarPerguntaComSecao": [
+                                         {
+                                          "pergunta": {
+                                           "id": "125",
+                                           "descricao": "teste com sec",
+                                           "tipoPergunta": "Intensidade",
+                                           "ordem": "10",
+                                           "obrigatorio": "true"
+                                          },
+                                          "alternativas": {
+                                           "descricao": "Alternativa Teste com seção",
+                                           "ordem": "2"
+                                          }
+                                         }
                                         ]
                                        }'
                                         onChange={e=> e.preventDefault(handleChange(e.target.value))}
@@ -311,10 +312,11 @@ const PesquisaMsAdmin = ()  =>{
                                 {status?<Button className={classes.botao}  onClick={handleCase}>
                                     Visualizar caso =>{i}/{resposta.length}
                                 </Button>:null}
-                                {status?<a href="/PESQUISAMS_ADMIN" style={{color:'blue', fontSize:'10px', width:'100px'}} onClick={()=>{ window.location.reload(false);}}>
+                                
+                                </div>
+                                {status?<a href="/PESQUISAMS_ADMIN" style={{color:'blue', fontSize:'10px', width:'100px'}} >
                                     Testar novamente ...
                                 </a>:null}
-                                </div>
                                 </Grid>
 
                                 <Grid item xs={8}>

@@ -51,7 +51,7 @@ const useStyles = makeStyles(theme =>({
         background:'#363636',
         color:'white',
         borderRadius:'15px',
-        overflow: 'hidden',
+        overflow: 'visible',
         width:'100%',
         height:'100px'
 
