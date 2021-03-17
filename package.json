@@ -9,6 +9,7 @@
     "@material-ui/lab": "^4.0.0-alpha.57",
     "@react-pdf/renderer": "^1.6.13",
     "axios": "^0.19.2",
+    "dotenv": "^8.2.0",
     "formik": "^2.2.6",
     "puppeteer": "^5.5.0",
     "react": "^16.10.2",
@@ -40,5 +41,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "env-cmd": "^10.1.0"
   }
 }
