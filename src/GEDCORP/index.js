@@ -251,13 +251,13 @@ const  Main = ()  =>{
                                 />
                                     <div style={{display:'flex'}}>
 
-                                {status?null:<Button className={classes.botao} disabled={boo} onClick={handleSubmit}>
+                                {status?null:<Button className={classes.botao} disabled={boo} onClick={()=>handleSubmit}>
                                     Testar 
                                 {boo?<CircularProgress style={{color:'white', display:'fixed'}} />:null}
 
                                 </Button>}
                                
-                                {status?<Button className={classes.botao}  onClick={handleCase()}>
+                                {status?<Button className={classes.botao}  onClick={()=>handleCase()}>
                                     Visualizar caso =>{i}/{resposta.length}
                                 </Button>:null}
                                 {status?<a href="/" style={{color:'blue', fontSize:'10px', width:'100px'}} >
