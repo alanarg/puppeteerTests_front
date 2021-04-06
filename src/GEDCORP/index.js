@@ -7,6 +7,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import DialogP from '../dialogs/dia_print';
 import DialogU from '../dialogs/dia_urls';
 import DialogL from '../dialogs/dia_logs';
+import RegraTable from '../Regras/index';
 
 
 import './styles.css';
@@ -68,6 +69,10 @@ const useStyles = makeStyles(theme =>({
     },
     dialog:{
        margin:'5px' 
+    },
+    chip:{
+        scrollMarginBottom:'2em',
+        backgroundColor:'#00E0A6'
     }
 
 }));
@@ -80,14 +85,19 @@ const  Main = ()  =>{
     const [urlsres, setUrlsres] = useState(['']);
     const [logs, setLogs] = useState(['']);
     const [i, setI] = useState(0);
+    // const [pesqChip, setpesqChip] = useState(['']);
     const [editing, setEditing] = useState(false);
     const [print, setPrint] = useState('');
+    const [regras, setRegras] = useState([]);
     const [validado,setValidado] = useState(true);
     const [boo, setBoo] = useState(false);
     const [resposta, setResposta] = useState(['']);
+    // const [ruleaux, setRuleaux] = useState(false)
     let time = null
 
 
+
+    
     //  let tgtv =0
     //Simples debounce para a inserção do obejto de entrada
     function handleChange(t){
@@ -169,7 +179,28 @@ const  Main = ()  =>{
 
     }
     
+    // Carrega as regras do sistema
+    async function handleChip(system){
+          console.log(system);
+        try{
+            //variável para loading
+            setBoo(true);
+   
+            await api.get( `/regra/gedcorp/${system}` ,{headers: {'Content-Type': 'application/json'}}).then(t=>{
+                setBoo(false);
+                setRegras(t);
+            });
+            return console.log(regras);
 
+
+        }catch(error){
+
+            setBoo(false);
+            console.log(error);
+
+        }
+
+    }
     return (
         <> 
 
@@ -226,7 +257,7 @@ const  Main = ()  =>{
 
                                 </Button>}
                                
-                                {status?<Button className={classes.botao}  onClick={handleCase}>
+                                {status?<Button className={classes.botao}  onClick={handleCase()}>
                                     Visualizar caso =>{i}/{resposta.length}
                                 </Button>:null}
                                 {status?<a href="/" style={{color:'blue', fontSize:'10px', width:'100px'}} >
@@ -234,9 +265,11 @@ const  Main = ()  =>{
                                 </a>:null}
                                 </div>
                                 </Grid>
+
+                                {/* CHIPS PARAMAPEAR REGRAS  */}
                                 <Grid item xs={8}>
                                 <Typography variant="h12" >
-                                    functions: <Chip label="Pesquisar"></Chip>
+                                    Funcionalidades: <Chip label="pesquisa" className={classes.chip} onClick={ () => handleChip('pesquisa') }/>
                                 </Typography>
                                 <Typography variant="h6" >
                                     Resultados dos casos de teste 
@@ -264,7 +297,11 @@ const  Main = ()  =>{
                                     </Grid>
                                     <Grid item>
                                         <DialogP  image={print}/>      
-                                    </Grid>                         
+                                    </Grid>
+                                    <Grid item>
+                                       
+                                        <RegraTable rules={regras} sistema='gedcorp'/>      
+                                    </Grid>                        
                                 </Grid>
                             </Grid>
                             </Paper>
