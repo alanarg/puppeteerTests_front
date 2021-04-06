@@ -28,7 +28,7 @@ export default function ResponsiveDialog(props) {
 
   const [open, setOpen] = React.useState(false);
   const theme = useTheme();
-  const urlsRequest = props.ursreq;
+  // const urlsRequest = props.ursreq;
   const urlsResponse = props.ursres;
 
   const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
@@ -55,18 +55,9 @@ export default function ResponsiveDialog(props) {
         aria-labelledby="responsive-dialog-title"
       >
         <DialogTitle id="responsive-dialog-title">{"Requests"}</DialogTitle>
+        
         <DialogContent >
           <h1>Requests</h1>
-          <DialogContentText className={classes.di_text}>
-            <ul>
-                { urlsRequest?urlsRequest.map(r=>{
-                     return <li><Typography>{r.url}</Typography></li>;
-                }):null}
-            </ul>
-          </DialogContentText>
-        </DialogContent>
-        <DialogContent >
-          <h1>Responses</h1>
           <DialogContentText className={classes.di_text}>
             <ul>
                 { urlsResponse?urlsResponse.map(r=>{
