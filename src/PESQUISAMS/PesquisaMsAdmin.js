@@ -235,7 +235,7 @@ const PesquisaMsAdmin = ()  =>{
                                          "nome": "",
                                          "dominio": "FAZENDA.MS",
                                          "senha": "",
-                                         "perfil": "(DSGI) - Administrador Geral - Desenvolvimento"
+                                         "perfil": "(SGI) - Administrador Geral - Homologação"
                                         },
                                         "categoriaPesquisar": [
                                          {
