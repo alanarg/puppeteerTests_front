@@ -7,6 +7,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import DialogP from '../dialogs/dia_print';
 import DialogU from '../dialogs/dia_urls';
 import DialogL from '../dialogs/dia_logs';
+import RegraTable from '../Regras/index';
 
 
 import './styles.css';
@@ -398,6 +399,10 @@ const PesquisaMsAdmin = ()  =>{
                                   <Grid>
                                       {err?<Typography variant="h6">{err}</Typography>:null}
                                   </Grid>
+                                  <Grid item>
+                                       
+                                       <RegraTable rules={regras} sistema='gedcorp'/>      
+                                   </Grid>  
 
                                 </Grid>
                             </Grid>
