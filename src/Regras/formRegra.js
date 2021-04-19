@@ -9,7 +9,7 @@ const FormRegra = (props) => {
   const onFinish = async (values) => {
 
     try {
-      await api.post('/regra',{sistema:sys, funcionalidade:values.funcionalidade,descricao:values.descricao},{headers: {'Content-Type': 'application/json'}}).then(t=>{
+      await api.post('/regra',{sistema:sys, titulo:values.titulo,funcionalidade:values.funcionalidade,descricao:values.descricao},{headers: {'Content-Type': 'application/json'}}).then(t=>{
         return t;
       }
       );
@@ -48,6 +48,7 @@ const FormRegra = (props) => {
       onFinish={onFinish}
       onFinishFailed={onFinishFailed}
     >
+
       <Form.Item
         label="Funcionalidade"
         name="funcionalidade"
@@ -59,7 +60,17 @@ const FormRegra = (props) => {
       >
         <Input />
       </Form.Item>
-
+      <Form.Item
+        label="Título"
+        name="titulo"
+        rules={[
+          {
+            required: true
+          },
+        ]}
+      >
+        <Input />
+      </Form.Item>
       <Form.Item
         label="Descrição"
         name="descricao"
