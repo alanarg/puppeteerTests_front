@@ -257,7 +257,7 @@ const  Main = ()  =>{
 
                                 </Button>}
                                
-                                {status?<Button className={classes.botao}  onClick={handleCase()}>
+                                {status?<Button className={classes.botao}  onClick={handleCase}>
                                     Visualizar caso =>{i}/{resposta.length}
                                 </Button>:null}
                                 {status?<a href="/" style={{color:'blue', fontSize:'10px', width:'100px'}} >
