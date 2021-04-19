@@ -69,6 +69,10 @@ const useStyles = makeStyles(theme =>({
     },
     dialog:{
        margin:'5px' 
+    },
+    chip:{
+       scrollMarginBottom:'2em',
+        backgroundColor:'#00E0A6'
     }
 
 }));
@@ -79,7 +83,7 @@ const PesquisaMsAdmin = ()  =>{
     const [status, setStatus] = useState("");
     const [logs, setLogs] = useState(['']);
     const [i, setI] = useState(0);
-    
+    const [err, setErr] = useState('');
     const [print, setPrint] = useState('');
     const [urlsreq, setUrlsreq] = useState(['']);
     const [urlsres, setUrlsres] = useState(['']);
@@ -87,6 +91,7 @@ const PesquisaMsAdmin = ()  =>{
     const [validado,setValidado] = useState(true);
     const [resposta, setResposta] = useState(['']);
     const [editing, setEditing] = useState(false);
+    const [regras, setRegras] = useState(['']);
     let time = null
 
 
@@ -128,7 +133,7 @@ const PesquisaMsAdmin = ()  =>{
     //Faz a requisição da API rodando puppeteer
     async function handleSubmit(){
         console.log(enter);
-        try{
+        // try{
             //variável para loading
             setBoo(true);
             //limpando resposta anterior
@@ -144,14 +149,15 @@ const PesquisaMsAdmin = ()  =>{
                 return setResposta(re);
 
 
-            });
+            }).catch(c => console.log(c));
 
-        }catch(error){
+        // }catch(error){
+        //     setErr(error.toString());
+        //     setBoo(false);
+        //     setResposta(error.data);
+        //     console.log(error.toString());
 
-            setBoo(false);
-            console.log(error);
-
-        }
+        // }
 
 
     }
@@ -171,7 +177,28 @@ const PesquisaMsAdmin = ()  =>{
         return setI(i+1);
 
     }
+     // Carrega as regras do sistema
+     async function handleChip(system){
+        console.log(system);
+      try{
+          //variável para loading
+          setBoo(true);
+ 
+          await api.get( `/regra/pesquisams/${system}` ,{headers: {'Content-Type': 'application/json'}}).then(t=>{
+              setBoo(false);
+              setRegras(t);
+          });
+          return console.log(regras);
 
+
+      }catch(error){
+
+          setBoo(false);
+          console.log(error);
+
+      }
+
+  }
     return (
         <> 
 
@@ -204,8 +231,7 @@ const PesquisaMsAdmin = ()  =>{
                                     aria-label="maximum height"
                                     placeholder="JSON de entradas"
                                     defaultValue='{
-                                        "ambiente": "localhost:4200",
-                                        "visualizarTeste": true,
+                                        "ambiente": "hom.adm.pesquisa.ms.gov.br",
                                         "login": {
                                          "nome": "",
                                          "dominio": "FAZENDA.MS",
@@ -323,9 +349,18 @@ const PesquisaMsAdmin = ()  =>{
 
                                         <div>
                                 <Typography variant="h12" >
-
-                                    <i>funções:</i> <Chip label="login"/>
-                                    <Chip label="pesquisar"/><Chip label="nova pesquisa"/>
+                                    Funcionalidades: <Chip label="Login" className={classes.chip} onClick={ () => handleChip('login') }/>
+                                    <Chip label="Pequisar_Categoria" className={classes.chip} onClick={ () => handleChip('Pequisar_Categoria') }/>
+                                    <Chip label="Cadastrar_Categoria" className={classes.chip} onClick={ () => handleChip('Cadastrar_Categoria') }/>
+                                    <Chip label="Pesquisar_Pesquisa" className={classes.chip} onClick={ () => handleChip('Pesquisar_Pesquisa') }/>
+                                    <Chip label="Cadastrar_Pesquisa" className={classes.chip} onClick={ () => handleChip('Cadastrar_Pesquisa') }/>
+                                    <Chip label="Cadastrar_Banner" className={classes.chip} onClick={ () => handleChip('Cadastrar_Banner') }/>
+                                    <Chip label="Editar_Pesquisa" className={classes.chip} onClick={ () => handleChip('Editar_Pesquisa') }/>
+                                    <Chip label="Pesquisar_Pesquisa" className={classes.chip} onClick={ () => handleChip('Pesquisar_Pesquisa') }/>
+                                    <Chip label="Criar_Secao" className={classes.chip} onClick={ () => handleChip('Criar_Secao') }/>
+                                    <Chip label="Criar_Pergunta" className={classes.chip} onClick={ () => handleChip('Criar_Pergunta') }/>
+                                    <Chip label="Criar_Pergunta_Com_Secao" className={classes.chip} onClick={ () => handleChip('Criar_Pergunta_Com_Secao') }/>
+                                                                        
                                 </Typography>
                                 </div>
                                 <div>
@@ -355,20 +390,18 @@ const PesquisaMsAdmin = ()  =>{
                                   alignItems="flex-start"
                                 >
                                     <Grid item>
-                                <DialogU ursreq={urlsreq} ursres={urlsres} />
-
+                                        <DialogU ursreq={urlsreq} ursres={urlsres} />
                                     </Grid>
-                                    <Grid item></Grid>
-                                <DialogL log={logs}/>
-
+                                        <DialogL log={logs}/>
                                   </Grid>
                                   <Grid item>
-                                <DialogP  image={print}/>
-                                       
+                                    <DialogP  image={print}/>   
                                   </Grid>
-                                </Grid>
+                                  <Grid>
+                                      {err?<Typography variant="h6">{err}</Typography>:null}
+                                  </Grid>
 
-                               
+                                </Grid>
                             </Grid>
                            
                             </Paper>
