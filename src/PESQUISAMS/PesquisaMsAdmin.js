@@ -149,15 +149,13 @@ const PesquisaMsAdmin = ()  =>{
                 return setResposta(re);
 
 
-            }).catch(c => console.log(c));
+            }).catch(c => {
+            setErr(c.toString());
+            setBoo(false);
+            setResposta(c.data);
+            console.log(c.toString());
 
-        // }catch(error){
-        //     setErr(error.toString());
-        //     setBoo(false);
-        //     setResposta(error.data);
-        //     console.log(error.toString());
-
-        // }
+        });
 
 
     }
