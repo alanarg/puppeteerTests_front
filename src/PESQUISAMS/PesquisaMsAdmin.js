@@ -139,7 +139,7 @@ const PesquisaMsAdmin = ()  =>{
             setBoo(true);
             //limpando resposta anterior
             setResposta(['']);
-            await api.post('/pesquisams_admin_login',enter,{headers: {'Content-Type': 'application/json'}}).then(t=>{
+            await api.post('/pesquisams_admin_login',enter,{headers: {'Content-Type': 'application/json','Access-Control-Allow-Origin':'*'}}).then(t=>{
                 setBoo(false);
                 //status da requisição geral
                 setStatus(t.status);
