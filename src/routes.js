@@ -11,9 +11,9 @@ const Routes = ()=>(
     <BrowserRouter>
         <Switch>
         <Route exact path="/" component={Main}/>
-        <Route exact path="/GEDCORP" component={Main}/>
-        <Route exact path="/REDESUAS" component={RedeSuas}/>
-        <Route exact path="/PESQUISAMS_ADMIN" component={PesquisaMsAdmin}/>
+        <Route  path="/GEDCORP" component={Main}/>
+        <Route  path="/REDESUAS" component={RedeSuas}/>
+        <Route  path="/PESQUISAMS_ADMIN" component={PesquisaMsAdmin}/>
 
 
 
