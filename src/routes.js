@@ -34,6 +34,7 @@ const SecuredRoute = ({ component: Component, ...rest }) => (
 const Routes = ()=>(
     <BrowserRouter>
         <Switch>
+
             <Route exact path="/login" component={Login}/>
             <SecuredRoute exact path="/" component={Main}/>
             <SecuredRoute exact path="/GEDCORP" component={Main}/>
@@ -41,6 +42,7 @@ const Routes = ()=>(
             <SecuredRoute exact path="/PESQUISAMS_ADMIN" component={PesquisaMsAdmin}/>
             <SecuredRoute exact path="/VALEUNIVERSIDADE_ACADEMICO" component={ValeAcademico}/>            
             <SecuredRoute exact path="/VALEUNIVERSIDADE_ADM" component={ValeAdm}/>            
+
 
         </Switch>
     </BrowserRouter>

@@ -139,7 +139,9 @@ const PesquisaMsAdmin = ()  =>{
             setBoo(true);
             //limpando resposta anterior
             setResposta(['']);
+
             await api.post('/pesquisams_admin_login',{"login":{"user":localStorage.getItem("usuario"),"senha":localStorage.getItem("senha"), "dominio": "FAZENDA.MS", "perfil": "(DSGI) - Administrador Geral - Desenvolvimento"}, "entradas":JSON.parse(enter)},{headers: {'Content-Type': 'application/json'}}).then(t=>{
+
                 setBoo(false);
                 //status da requisição geral
                 setStatus(t.status);
@@ -230,11 +232,14 @@ const PesquisaMsAdmin = ()  =>{
                                     aria-label="maximum height"
                                     placeholder="JSON de entradas"
                                     defaultValue='{
+
                                         "ambiente": "hom",
                                       
                                         "categoriaPesquisar": {
                                         "chave":false,
                                         "casos":[
+
+
                                          {
                                           "descricao": "a"
                                          },
@@ -363,7 +368,7 @@ const PesquisaMsAdmin = ()  =>{
 
                                         <div>
                                 <Typography variant="h12" >
-                                    Funcionalidades: <Chip label="Login" className={classes.chip} onClick={ () => handleChip('login') }/>
+                                    Funcionalidades: <Chip label="Login" className={classes.chip} onClick={ () => handleChip('Login') }/>
                                     <Chip label="Pequisar_Categoria" className={classes.chip} onClick={ () => handleChip('Pequisar_Categoria') }/>
                                     <Chip label="Cadastrar_Categoria" className={classes.chip} onClick={ () => handleChip('Cadastrar_Categoria') }/>
                                     <Chip label="Pesquisar_Pesquisa" className={classes.chip} onClick={ () => handleChip('Pesquisar_Pesquisa') }/>
@@ -416,7 +421,7 @@ const PesquisaMsAdmin = ()  =>{
                                   </Grid>
                                   <Grid item>
                                        
-                                       <RegraTable rules={regras} sistema='gedcorp'/>      
+                                       <RegraTable rules={regras} sistema='pesquisams'/>      
                                    </Grid>  
 
                                 </Grid>
