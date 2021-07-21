@@ -49,7 +49,7 @@ export default function ResponsiveDialog(props) {
       </Button>
       </div>
       <Dialog
-        fullScreen={fullScreen}
+        fullScreen
         open={open}
         onClose={handleClose}
         aria-labelledby="responsive-dialog-title"

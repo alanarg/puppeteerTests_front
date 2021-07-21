@@ -5,6 +5,7 @@ import foto from './sgig08.jfif';
 import IconButton from '@material-ui/core/IconButton';
 import { fade, makeStyles } from '@material-ui/core/styles';
 import Drawer from '../drawer/index';
+import { useHistory } from 'react-router-dom';
 
 
 const useStyles = makeStyles(theme => ({
@@ -38,6 +39,15 @@ const useStyles = makeStyles(theme => ({
       width: 'auto',
     },
   },
+  sair:{
+    backgroundColor:'#00E0A6',
+    width:'50px',
+    height:'35px',
+    color:'white',
+    margin:'5px',
+    fontSize:'20px'
+
+  },
   searchIcon: {
     width: theme.spacing(7),
     height: '100%',
@@ -65,6 +75,14 @@ const useStyles = makeStyles(theme => ({
 
 const SearchAppBar = () => {
     const classes = useStyles();
+    const history = useHistory();
+
+
+  function HandleSair(){
+    localStorage.clear();
+
+    return history.push("/");
+  }
     
   return (
       <>
@@ -82,7 +100,7 @@ const SearchAppBar = () => {
           <img src={foto} alt="" className={classes.logo}/>
 
           </div>
-        
+  
           {/* logo */}
           {/* <Paper style={{width:'300px', borderRadius:'10px', padding:'3px'}}>
            <img alt="logo" src={logo} width='200px'></img>
@@ -94,7 +112,14 @@ const SearchAppBar = () => {
           
 
         </Toolbar>
+      
       </AppBar>
+    
+      <div align="end">
+          <button  className={classes.sair} onClick={HandleSair}>
+            sair
+          </button>
+        </div>
     </div>
     </>
   );

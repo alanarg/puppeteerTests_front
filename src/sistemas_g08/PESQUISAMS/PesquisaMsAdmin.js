@@ -1,13 +1,13 @@
 import React, {useState } from 'react';
-import SearchAppBar from '../Appbar/index';
+import SearchAppBar from '../../components/Appbar/index';
 import {Chip,Grid,Paper, Typography, TextareaAutosize, Button} from '@material-ui/core';
 import {makeStyles} from '@material-ui/core/styles';
-import api from '../services/api';
+import api from '../../services/api';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import DialogP from '../dialogs/dia_print';
-import DialogU from '../dialogs/dia_urls';
-import DialogL from '../dialogs/dia_logs';
-import RegraTable from '../Regras/index';
+import DialogP from '../../components/dialogs/dia_print';
+import DialogU from '../../components/dialogs/dia_urls';
+import DialogL from '../../components/dialogs/dia_logs';
+import RegraTable from '../../components/Regras/index';
 
 
 import './styles.css';
@@ -139,7 +139,7 @@ const PesquisaMsAdmin = ()  =>{
             setBoo(true);
             //limpando resposta anterior
             setResposta(['']);
-            await api.post('/pesquisams_admin_login',enter,{headers: {'Content-Type': 'application/json'}}).then(t=>{
+            await api.post('/pesquisams_admin_login',{"login":{"user":localStorage.getItem("usuario"),"senha":localStorage.getItem("senha"), "dominio": "FAZENDA.MS", "perfil": "(DSGI) - Administrador Geral - Desenvolvimento"}, "entradas":JSON.parse(enter)},{headers: {'Content-Type': 'application/json'}}).then(t=>{
                 setBoo(false);
                 //status da requisição geral
                 setStatus(t.status);
@@ -230,22 +230,22 @@ const PesquisaMsAdmin = ()  =>{
                                     aria-label="maximum height"
                                     placeholder="JSON de entradas"
                                     defaultValue='{
-                                        "ambiente": "hom.adm.pesquisa.ms.gov.br",
-                                        "login": {
-                                         "nome": "",
-                                         "dominio": "FAZENDA.MS",
-                                         "senha": "",
-                                         "perfil": "(DSGI) - Administrador Geral - Desenvolvimento"
-                                        },
-                                        "categoriaPesquisar": [
+                                        "ambiente": "hom",
+                                      
+                                        "categoriaPesquisar": {
+                                        "chave":false,
+                                        "casos":[
                                          {
                                           "descricao": "a"
                                          },
                                          {
                                           "descricao": "b"
                                          }
-                                        ],
-                                        "pesquisar": [
+                                        ]
+                                        },
+                                        "pesquisar": {
+                                        "chave":false,
+                                        "casos":[
                                          {
                                           "categoria": "TECNOLOGIA DA INFORMAÇÃO",
                                           "titulo": "Pesquisa sobre Tecnologia",
@@ -260,8 +260,11 @@ const PesquisaMsAdmin = ()  =>{
                                           "datainicio": "",
                                           "datafim": ""
                                          }
-                                        ],
-                                        "cadastrarPesquisa": [
+                                        ]
+                                        },
+                                        "cadastrarPesquisa":{
+                                        "chave":false,
+                                        "casos":[
                                          {
                                           "categoria": "TECNOLOGIA DA INFORMAÇÃO",
                                           "titulo": "Puppeteer teste",
@@ -273,20 +276,27 @@ const PesquisaMsAdmin = ()  =>{
                                           "telefone": "9999999009",
                                           "autenticacao": "false"
                                          }
-                                        ],
-                                        "cadastrarCategoria": [
+                                        ]
+                                        },
+                                        "cadastrarCategoria": {
+                                        "chave":false,
+                                        "casos":[
                                          {
                                           "descricao": "banner_teste"
                                          }
-                                        ],
-                                        "cadastrarBanner": [
+                                        ]},
+                                        "cadastrarBanner": {
+                                        "chave":false,
+                                        "casos":[
                                          {
                                           "nome": "ativo",
                                           "ativo": "ativo",
                                           "principal": "sim"
                                          }
-                                        ],
-                                        "editarPesquisa": [
+                                        ]},
+                                        "editarPesquisa": {
+                                        "chave":false,
+                                        "casos":[
                                          {
                                           "id": "120",
                                           "categoria": "SAÚDE",
@@ -300,16 +310,23 @@ const PesquisaMsAdmin = ()  =>{
                                           "autenticacao": "false",
                                           "comsecao": "true"
                                          }
-                                        ],
-                                        "criarSecao": [
+                                        ]},
+                                        "criarSecao":{
+                                        "chave":false,
+                                        "casos":[
                                          {
                                           "id": "120",
                                           "descricao": "null",
                                           "ordem": "2"
                                          }
-                                        ],
-                                        "criarPergunta": [],
-                                        "criarPerguntaComSecao": [
+                                        ]},
+                                        "criarPergunta":{
+                                            "chave":false,
+                                            "casos":[]
+                                        },
+                                        "criarPerguntaComSecao":{
+                                            "chave":false,
+                                            "casos": [
                                          {
                                           "pergunta": {
                                            "id": "125",
@@ -323,25 +340,23 @@ const PesquisaMsAdmin = ()  =>{
                                            "ordem": "2"
                                           }
                                          }
-                                        ]
+                                        ]}
                                        }'
                                         onChange={e=> e.preventDefault(handleChange(e.target.value))}
                                 />
                                  <div style={{display:'flex'}}>
 
-                                 {status?null:<Button className={classes.botao} disabled={boo} onClick={handleSubmit}>
+                                <Button className={classes.botao} disabled={boo} onClick={handleSubmit}>
                                     Testar 
                                 {boo?<CircularProgress style={{color:'white', display:'fixed'}} />:null}
 
-                                </Button>}
+                                </Button>
                                 {status?<Button className={classes.botao}  onClick={handleCase}>
                                     Visualizar caso =>{i}/{resposta.length}
                                 </Button>:null}
                                 
                                 </div>
-                                {status?<a href="/PESQUISAMS_ADMIN" style={{color:'blue', fontSize:'10px', width:'100px'}} >
-                                    Testar novamente ...
-                                </a>:null}
+                        
                                 </Grid>
 
                                 <Grid item xs={8}>

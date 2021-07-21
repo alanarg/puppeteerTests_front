@@ -1,12 +1,12 @@
 import React, {useState } from 'react';
-import SearchAppBar from '../Appbar/index';
+import SearchAppBar from '../../components/Appbar/index';
 import {Grid,Paper, Typography, TextareaAutosize, Button, Chip} from '@material-ui/core';
 import {makeStyles} from '@material-ui/core/styles';
-import api from '../services/api';
+import api from '../../services/api';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import DialogP from '../dialogs/dia_print';
-import DialogU from '../dialogs/dia_urls';
-import DialogL from '../dialogs/dia_logs';
+import DialogP from '../../components/dialogs/dia_print';
+import DialogU from '../../components/dialogs/dia_urls';
+import DialogL from '../../components/dialogs/dia_logs';
 
 
 import './styles.css';

@@ -67,6 +67,17 @@ export default function TemporaryDrawer() {
           <ListItem button >
             <Link to="/PESQUISAMS_ADMIN"><ListItemText className={classes.texto} >PESQUISAMS</ListItemText></Link>
           </ListItem>
+
+          <ListItem button >
+            
+            <Link to="/VALEUNIVERSIDADE_ACADEMICO"><ListItemText className={classes.texto}>VALEUNIVERSIDADE ACADEMICO</ListItemText></Link>
+
+          </ListItem>
+          <ListItem button >
+            
+            <Link to="/VALEUNIVERSIDADE_ADM"><ListItemText className={classes.texto}>VALEUNIVERSIDADE ADM</ListItemText></Link>
+
+          </ListItem>
         
       </List>
       <Divider />
