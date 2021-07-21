@@ -1,10 +1,8 @@
-import React,{useState} from 'react';
+import React from 'react';
 import { useHistory } from 'react-router-dom';
-import { Form, Input, Button, Checkbox } from 'antd';
+import { Form, Input, Button} from 'antd';
 import Paper from '@material-ui/core/Paper';
-import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import logo from './sgig08.jfif';
 
@@ -67,7 +65,6 @@ const useStyles = makeStyles(theme => ({
 export default function SignInSide() {
   const classes = useStyles();
   const history = useHistory();
-  const [user, setUser] = useState('');
 
   const onFinish = (values) => {
     console.log(values)

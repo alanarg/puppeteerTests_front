@@ -8,8 +8,6 @@ import {makeStyles} from '@material-ui/core/styles';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
-import { useTheme } from '@material-ui/core/styles';
 import './styles.css';
 
 
@@ -25,9 +23,7 @@ export default function ResponsiveDialog(props) {
   const classes = useStyles();
 
   const [open, setOpen] = React.useState(false);
-  const theme = useTheme();
   const logs = props.log;
-  const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
   const handleClickOpen = () => {
     console.log(logs);
