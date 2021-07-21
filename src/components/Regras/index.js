@@ -6,7 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import TextArea from '@material-ui/core/TextareaAutosize';
 import { Button } from '@material-ui/core';
-import api from '../services/api';
+import api from '../../services/api';
 import FromRegra from './formRegra';
 
 const useStyles = makeStyles({
