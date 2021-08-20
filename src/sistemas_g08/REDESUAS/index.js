@@ -210,7 +210,7 @@ const RedeSuas = ()  =>{
                             
                                 <Grid item xs={4}>
                                 <Typography variant="h6" style={{color:"#00E0A6"}} >
-                                    Casos de teste <i><b>PESQUISA MS ADMIN</b></i>
+                                    Casos de teste <i><b>REDESUAS</b></i>
                                 </Typography>
                                 {validado?null:<Typography style={{fontSize:"10px", color:"red"}}>
                                     Descreva com um JSON os casos de testes
