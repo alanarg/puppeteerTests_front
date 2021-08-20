@@ -9,6 +9,7 @@ import ValeAcademico from './sistemas_g08/VALE_ACADEMICO/index';
 import ValeAdm from './sistemas_g08/VALE_ADM/index';
 import Login from './components/login/index';
 
+
 const isLoggedIn = () => {
      if(localStorage.getItem('senha')!== null){
         return true;
@@ -41,7 +42,8 @@ const Routes = ()=>(
             <SecuredRoute exact path="/REDESUAS" component={RedeSuas}/>
             <SecuredRoute exact path="/PESQUISAMS_ADMIN" component={PesquisaMsAdmin}/>
             <SecuredRoute exact path="/VALEUNIVERSIDADE_ACADEMICO" component={ValeAcademico}/>            
-            <SecuredRoute exact path="/VALEUNIVERSIDADE_ADM" component={ValeAdm}/>            
+            <SecuredRoute exact path="/VALEUNIVERSIDADE_ADM" component={ValeAdm}/>   
+
 
 
         </Switch>

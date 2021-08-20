@@ -359,14 +359,11 @@ const PesquisaMsAdmin = ()  =>{
                                 {status?<Button className={classes.botao}  onClick={handleCase}>
                                     Visualizar caso =>{i}/{resposta.length}
                                 </Button>:null}
-                                
                                 </div>
-                        
                                 </Grid>
 
                                 <Grid item xs={8}>
-
-                                        <div>
+                                <div>
                                 <Typography variant="h12" >
                                     Funcionalidades: <Chip label="Login" className={classes.chip} onClick={ () => handleChip('Login') }/>
                                     <Chip label="Pequisar_Categoria" className={classes.chip} onClick={ () => handleChip('Pequisar_Categoria') }/>
@@ -378,12 +375,10 @@ const PesquisaMsAdmin = ()  =>{
                                     <Chip label="Pesquisar_Pesquisa" className={classes.chip} onClick={ () => handleChip('Pesquisar_Pesquisa') }/>
                                     <Chip label="Criar_Secao" className={classes.chip} onClick={ () => handleChip('Criar_Secao') }/>
                                     <Chip label="Criar_Pergunta" className={classes.chip} onClick={ () => handleChip('Criar_Pergunta') }/>
-                                    <Chip label="Criar_Pergunta_Com_Secao" className={classes.chip} onClick={ () => handleChip('Criar_Pergunta_Com_Secao') }/>
-                                                                        
+                                    <Chip label="Criar_Pergunta_Com_Secao" className={classes.chip} onClick={ () => handleChip('Criar_Pergunta_Com_Secao') }/>                    
                                 </Typography>
                                 </div>
                                 <div>
-
                                 <Typography variant="h6" >
                                     Resultados dos casos de teste 
                                 </Typography>
