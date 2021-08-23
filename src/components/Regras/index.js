@@ -32,7 +32,7 @@ const useStyles = makeStyles({
 export default function ListRules(props) {
   const classes = useStyles();
   let regras = props.rules.data;
-  let sistema = props.sistema;
+  const sistema = props.sistema;
   let time = null
   const [enter, setEnter] = useState('');
   const [aux, setAux] = useState(false);
