@@ -188,7 +188,7 @@ const ValeAdm = ()  =>{
           //variável para loading
           setBoo(true);
  
-          await api.get( `/regra/valeuniversidade/${system}` ,{headers: {'Content-Type': 'application/json'}}).then(t=>{
+          await api.get( `/regra/valeuniversidade_adm/${system}` ,{headers: {'Content-Type': 'application/json'}}).then(t=>{
               setBoo(false);
               setRegras(t);
           });
@@ -439,7 +439,13 @@ const ValeAdm = ()  =>{
 
                                         <div>
                                 <Typography variant="h12" >
-                                    Funcionalidades: <Chip label="Login" className={classes.chip} onClick={ () => handleChip('login') }/>
+                                    Funcionalidades: <Chip label="Login" className={classes.chip} onClick={ () => handleChip('Login') }/>
+                                    <Chip label="Entrevista" className={classes.chip} onClick={ () => handleChip('Entrevista') }/>
+                                    <Chip label="Processo_Seletivo" className={classes.chip} onClick={ () => handleChip('Processo_Seletivo') }/>
+                                    <Chip label="Oferta_Vagas" className={classes.chip} onClick={ () => handleChip('Oferta_Vagas') }/>
+                                    <Chip label="Gerenciar_Inscricoes" className={classes.chip} onClick={ () => handleChip('Gerenciar_Inscricoes') }/>
+                                    <Chip label="Cadastro_Orgao_Estado" className={classes.chip} onClick={ () => handleChip('Cadastro_Orgao_Estado') }/>
+
                                     
                                                                         
                                 </Typography>
@@ -483,7 +489,7 @@ const ValeAdm = ()  =>{
                                   </Grid>
                                   <Grid item>
                                        
-                                       <RegraTable rules={regras} sistema='gedcorp'/>      
+                                       <RegraTable rules={regras} sistema='valeuniversidade_adm'/>      
                                    </Grid>  
                             
                                 </Grid>

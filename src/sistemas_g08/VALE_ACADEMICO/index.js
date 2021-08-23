@@ -176,7 +176,7 @@ const ValeAcademico = ()  =>{
     }
      // Carrega as regras do sistema
      async function handleChip(system){
-        console.log(system);
+        
       try{
           //variável para loading
           setBoo(true);
@@ -359,7 +359,8 @@ const ValeAcademico = ()  =>{
 
                                         <div>
                                 <Typography variant="h12" >
-                                    Funcionalidades: <Chip label="Login" className={classes.chip} onClick={ () => handleChip('login') }/>
+                                    Funcionalidades: <Chip label="Login" className={classes.chip} onClick={ () => handleChip('Login') }/>
+                                    <Chip label="Fixa_Academica" className={classes.chip} onClick={ () => handleChip('Fixa_Academica') }/>
                                     
                                                                         
                                 </Typography>
@@ -403,7 +404,7 @@ const ValeAcademico = ()  =>{
                                   </Grid>
                                   <Grid item>
                                        
-                                       <RegraTable rules={regras} sistema='gedcorp'/>      
+                                       <RegraTable rules={regras} sistema='valeuniversidade'/>      
                                    </Grid>  
 
                                 </Grid>
