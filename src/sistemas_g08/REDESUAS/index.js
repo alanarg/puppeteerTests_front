@@ -375,6 +375,8 @@ const RedeSuas = ()  =>{
                                 <Typography variant="h6" gutterBottom >
                                 Sistema:
                                     <Chip label="Incentivo" className={classes.chip} onClick={ () => handleChip('Incentivo') }/>
+                                    <Chip label="Servico" className={classes.chip} onClick={ () => handleChip('Servico') }/>
+
                                 </Typography>
                                 </div>
                                 <div>

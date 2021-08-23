@@ -119,7 +119,7 @@ export default function ListRules(props) {
             onClick={(event) => event.stopPropagation()}
             onFocus={(event) => event.stopPropagation()}
             control={<Button ></Button>}
-            label={` ${r.titulo} criado em ${r.createdAt}`}
+            label={` ${r.titulo}`}
           />
 
         </AccordionSummary>
