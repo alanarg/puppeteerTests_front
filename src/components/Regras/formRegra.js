@@ -9,7 +9,11 @@ const FormRegra = (props) => {
   const onFinish = async (values) => {
 
     try {
-      await api.post('/regra',{sistema:sys, titulo:values.titulo,funcionalidade:values.funcionalidade,descricao:values.descricao},{headers: {'Content-Type': 'application/json'}}).then(t=>{
+      await api.post('/regra',{sistema:sys, titulo:values.titulo,funcionalidade:values.funcionalidade,descricao:values.descricao},{headers: {'Content-Type': 'application/json',  
+       "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Headers": "Authorization", 
+      "Access-Control-Allow-Methods": "GET, POST, OPTIONS, PUT, PATCH, DELETE" ,
+      "Content-Type": "application/json;charset=UTF-8"  }}).then(t=>{
         return t;
       }
       );
