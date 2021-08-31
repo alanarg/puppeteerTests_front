@@ -1,4 +1,4 @@
-import React, {useState } from 'react';
+import React, {useState, useEffect} from 'react';
 import SearchAppBar from '../../components/Appbar/index';
 import {Chip,Grid,Paper, Typography, TextareaAutosize, Button} from '@material-ui/core';
 import {makeStyles} from '@material-ui/core/styles';
@@ -91,8 +91,26 @@ const RedeSuas = ()  =>{
     const [resposta, setResposta] = useState(['']);
     const [editing, setEditing] = useState(false);
     const [regras, setRegras] = useState(['']);
-    let time = null;
+    const [placeholder, setPlaceholder] = useState("");
 
+    let time = null
+
+    useEffect(() => {
+        updatePlaceHolder();
+        console.log(placeholder);
+    }, [placeholder]);
+
+    async function updatePlaceHolder(){
+        await api.get('/objeto_test/redesuas',{headers: {'Content-Type': 'application/json'}}).then(t=>{
+            setPlaceholder(t.data[0].Objeto);
+            console.log(placeholder);
+
+        }).catch(c => {
+        setErr(c.toString());
+        console.log(c.toString());
+    });
+
+    }
     //  let tgtv =0
     //Simples debounce para a inserção do obejto de entrada
     function handleChange(t){
@@ -137,14 +155,14 @@ const RedeSuas = ()  =>{
             //limpando resposta anterior
             setResposta(['']);
 
-            await api.post('/pesquisams_admin_login',{"login":{"user":localStorage.getItem("usuario"),"senha":localStorage.getItem("senha"), "dominio": "FAZENDA.MS", "perfil": "(DSGI) - Administrador Geral - Desenvolvimento"}, "entradas":JSON.parse(enter)},{headers: {'Content-Type': 'application/json'}}).then(t=>{
+            await api.post('/redesuas',{"login":{"user":localStorage.getItem("usuario"),"senha":localStorage.getItem("senha"), "sistema":"536", "grupo":"883"}, "entradas":JSON.parse(enter)},{headers: {'Content-Type': 'application/json'}}).then(t=>{
 
                 setBoo(false);
                 //status da requisição geral
                 setStatus(t.status);
 
                 let re = Object.values(t.data.data)
-                console.log(re);
+                // console.log(re);
 
                 return setResposta(re);
 
@@ -156,6 +174,11 @@ const RedeSuas = ()  =>{
             console.log(c.toString());
 
         });
+           //Salvando novo placeholder
+        await api.post('/objeto_test',{sistema:'redesuas', Objeto:JSON.parse(enter)}, {headers: {'Content-Type': 'application/json'}}).then().catch((err)=>{
+            console.log(err);
+        });
+
 
 
     }
@@ -229,122 +252,7 @@ const RedeSuas = ()  =>{
                                     id="myTextArea"
                                     aria-label="maximum height"
                                     placeholder="JSON de entradas"
-                                    defaultValue='{
-
-                                        "ambiente": "hom",
-                                      
-                                        "categoriaPesquisar": {
-                                        "chave":false,
-                                        "casos":[
-
-
-                                         {
-                                          "descricao": "a"
-                                         },
-                                         {
-                                          "descricao": "b"
-                                         }
-                                        ]
-                                        },
-                                        "pesquisar": {
-                                        "chave":false,
-                                        "casos":[
-                                         {
-                                          "categoria": "TECNOLOGIA DA INFORMAÇÃO",
-                                          "titulo": "Pesquisa sobre Tecnologia",
-                                          "descricao": "",
-                                          "datainicio": "015/07/2020",
-                                          "datafim": "15/07/2020"
-                                         },
-                                         {
-                                          "categoria": "",
-                                          "titulo": "Pesquisa sobre Tecnologia",
-                                          "descricao": "",
-                                          "datainicio": "",
-                                          "datafim": ""
-                                         }
-                                        ]
-                                        },
-                                        "cadastrarPesquisa":{
-                                        "chave":false,
-                                        "casos":[
-                                         {
-                                          "categoria": "TECNOLOGIA DA INFORMAÇÃO",
-                                          "titulo": "Puppeteer teste",
-                                          "descricao": "Puppeteer teste",
-                                          "datainicio": "019/02/2021",
-                                          "datafim": "028/02/2021",
-                                          "nomeresponsavel": "Alan Arguelho",
-                                          "emailresponsavel": "aarguelho@gmail.com",
-                                          "telefone": "9999999009",
-                                          "autenticacao": "false"
-                                         }
-                                        ]
-                                        },
-                                        "cadastrarCategoria": {
-                                        "chave":false,
-                                        "casos":[
-                                         {
-                                          "descricao": "banner_teste"
-                                         }
-                                        ]},
-                                        "cadastrarBanner": {
-                                        "chave":false,
-                                        "casos":[
-                                         {
-                                          "nome": "ativo",
-                                          "ativo": "ativo",
-                                          "principal": "sim"
-                                         }
-                                        ]},
-                                        "editarPesquisa": {
-                                        "chave":false,
-                                        "casos":[
-                                         {
-                                          "id": "120",
-                                          "categoria": "SAÚDE",
-                                          "titulo": "Puppe",
-                                          "objetivo": "Puppeteer teste",
-                                          "datainicio": "19/02/20210",
-                                          "datafim": "28/02/20210",
-                                          "nomeresponsavel": "Alan Arguelho",
-                                          "emailresponsavel": "aarguelho@gmail.com",
-                                          "telefone": "9999999009",
-                                          "autenticacao": "false",
-                                          "comsecao": "true"
-                                         }
-                                        ]},
-                                        "criarSecao":{
-                                        "chave":false,
-                                        "casos":[
-                                         {
-                                          "id": "120",
-                                          "descricao": "null",
-                                          "ordem": "2"
-                                         }
-                                        ]},
-                                        "criarPergunta":{
-                                            "chave":false,
-                                            "casos":[]
-                                        },
-                                        "criarPerguntaComSecao":{
-                                            "chave":false,
-                                            "casos": [
-                                         {
-                                          "pergunta": {
-                                           "id": "125",
-                                           "descricao": "teste com sec",
-                                           "tipoPergunta": "Intensidade",
-                                           "ordem": "10",
-                                           "obrigatorio": "true"
-                                          },
-                                          "alternativas": {
-                                           "descricao": "Alternativa Teste com seção",
-                                           "ordem": "2"
-                                          }
-                                         }
-                                        ]}
-                                       }'
+                                    defaultValue={`${placeholder}`}
                                         onChange={e=> e.preventDefault(handleChange(e.target.value))}
                                 />
                                  <div style={{display:'flex'}}>

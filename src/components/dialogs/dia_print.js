@@ -49,7 +49,7 @@ export default function ResponsiveDialog(props) {
         onClose={handleClose}
         aria-labelledby="responsive-dialog-title"
       >
-        <DialogTitle id="responsive-dialog-title">{"CAPTCHA"}</DialogTitle>
+        {/* <DialogTitle id="responsive-dialog-title">{"CAPTCHA"}</DialogTitle>
       <DialogContent >
       <Form
           name="basic"
@@ -72,9 +72,9 @@ export default function ResponsiveDialog(props) {
 
 
         <img src={`${process.env.REACT_APP_API_URL}/captcha.jpg`} width="100%"  alt="print"/>
-        
+         */}
        
-      </DialogContent>
+      {/* </DialogContent> */}
         <DialogTitle id="responsive-dialog-title">{"Console Content"}</DialogTitle>
         <DialogContent >
           <img src={props.image} width="100%"  alt="print"/>

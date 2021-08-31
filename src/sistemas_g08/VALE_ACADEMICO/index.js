@@ -1,4 +1,4 @@
-import React, {useState } from 'react';
+import React, {useState, useEffect } from 'react';
 import SearchAppBar from '../../components/Appbar/index';
 import {Chip,Grid,Paper, Typography, TextareaAutosize, Button} from '@material-ui/core';
 import {makeStyles} from '@material-ui/core/styles';
@@ -93,9 +93,26 @@ const ValeAcademico = ()  =>{
     const [resposta, setResposta] = useState(['']);
     const [editing, setEditing] = useState(false);
     const [regras, setRegras] = useState(['']);
+    const [placeholder, setPlaceholder] = useState("");
+
     let time = null
 
+    useEffect(() => {
+        updatePlaceHolder();
+        console.log(placeholder);
+    }, [placeholder]);
 
+    async function updatePlaceHolder(){
+        await api.get('/objeto_test/valeuniversidade',{headers: {'Content-Type': 'application/json'}}).then(t=>{
+            setPlaceholder(t.data[0].Objeto);
+            console.log(placeholder);
+
+        }).catch(c => {
+        setErr(c.toString());
+        console.log(c.toString());
+    });
+
+    }
     //  let tgtv =0
     //Simples debounce para a inserção do obejto de entrada
     function handleChange(t){
@@ -139,13 +156,13 @@ const ValeAcademico = ()  =>{
             setBoo(true);
             //limpando resposta anterior
             setResposta(['']);
-            await api.post('/vale_academico',enter,{headers: {'Content-Type': 'application/json'}}).then(t=>{
+            await api.post('/vale_academico',JSON.parse(enter),{headers: {'Content-Type': 'application/json'}}).then(t=>{
                 setBoo(false);
                 //status da requisição geral
                 setStatus(t.status);
 
                 let re = Object.values(t.data.data)
-                console.log(re);
+                // console.log(re);
 
                 return setResposta(re);
 
@@ -155,6 +172,10 @@ const ValeAcademico = ()  =>{
             setBoo(false);
             setResposta(c.data);
             console.log(c.toString());
+        });
+        //Salvando novo placeholder
+        await api.post('/objeto_test',{sistema:'valeuniversidade', Objeto:JSON.parse(enter)}, {headers: {'Content-Type': 'application/json'}}).then().catch((err)=>{
+            console.log(err);
         });
 
 
@@ -224,120 +245,7 @@ const ValeAcademico = ()  =>{
                                     id="myTextArea"
                                     aria-label="maximum height"
                                     placeholder="JSON de entradas"
-                                    defaultValue='{
-                                        "ambiente":"hom",
-                                        "login":{
-                                            "cpf":"018125532005",
-                                            "senha":"lube1234"
-                                        },
-                                        "precadastro":{
-                                            "chave":true,
-                                            "casos":[
-                                            {
-                                                "nome_completo":"Naruto Uzumaki",
-                                                "cpf":"018125532005",
-                                                "email":"naruto@gmail.com",
-                                                "confirma_email":"naruto@gmail.com",
-                                                "senha":"lube1234",
-                                                "confirma_senha":"lube1234",
-                                                "indigena":"n"
-                                            }
-                                        ]
-                                        },
-                                        "dadosAcademico":{
-                                            "chave":false,
-                                            "caso":{
-                                            "nomeSocial":"Alan",
-                                            "sexo":"Masculino",
-                                            "dataNascimento":"027/04/2001",
-                                            "nacionalidade":"Brasileira",
-                                            "estadoCivil":"Solteiro",
-                                            "nis":"84333382057",
-                                            "rg":"2300144",
-                                            "orgaoEmissor":"SEJUSP",
-                                            "uf":"MMS",
-                                            "dataEmissaoRG":"015/04/2010",
-                                            "carteiraTrabalho":"2222222222222",
-                                            "telefoneResidencial":"06733541712",
-                                            "celular":"067992180103",
-                                            "necessidadeEspecial":"Sim",
-                                            "ensinoMedio":"1: Publica",
-                                            "nomeEscola":"Rui BARBOSA",
-                                            "semMae":"Sim",
-                                            "racacor":"Parda",
-                                            "resideFamilia":"Sim",
-                                            "ano":"10",
-                                            "mes":"4",
-                                            "cep":"079092141",
-                                            "numero":"710",
-                                            "complemento":"Casa Verde",
-                                            "referencia":"Esquina"
-                                            }
-                                                    
-                                        },
-                                        
-                                        "dadosFamilia":{
-                                            "chave":false,
-
-                                            "casos":[{
-                                            "nomeCompleto":"Erick Gomes Silva",
-                                            "grauParentesco":"Filho(a)",
-                                            "cpf":"076144947094",
-                                            "rendaMensal":"0200000",
-                                            "escolaridade":"Ensino Fundamental",
-                                            "estadoCivil":"Solteiro(a)",
-                                            "dataNascimento":"024/04/2001"
-                                            
-                                        }]
-                                        },
-                                        "ensinoSuperior":{
-                                            "chave":false,
-                                        
-                                            "caso":{
-                                                "instituicaoEnsino":"Universidade Federal de MS - UFMS Campo Grande",
-                                                "curso":"Sistemas da Informação",
-                                                "estaMatriculado":"Sim",
-                                                "semestreAnoInscricao":"1",
-                                                "semestreAnoAtual":"2",
-                                                "ingressoCurso":"002/02/2019",
-                                                "terminoCurso":"009/10/2022",
-                                                "periodoEstagio":"Tarde",
-                                                "possuiSuperior":"Não",
-                                                "possuiDP":"Não"
-                                            }
-                                        },
-                                        "dadosSociais":{
-                                        "chave":false,
-                                        "caso":{
-                                            "rendaIndividual":"90000",
-                                            "rendaFamiliar":"100000",
-                                            "rendaTotal":"190000",
-                                            "familiaBeneficio":"Não",
-                                            "valeTransporte":"Sim",
-                                            "beneficios":[
-                                                {
-                                                    "chave":true
-                                                },{
-                                                    "chave":true
-                                                },
-                                                {
-                                                    "chave":false
-                                                },
-                                                {
-                                                    "chave":false
-                                                },
-                                                {
-                                                    "chave":true
-                                                }
-                                    
-                                            ],
-                                            "outroBeneficio":"Outro Benefício"
-                                        }
-                                        }
-                                        
-                                        
-                                        
-                                    }'
+                                    defaultValue={`${placeholder}`}
                                         onChange={e=> e.preventDefault(handleChange(e.target.value))}
                                 />
                                  <div style={{display:'flex'}}>
@@ -360,7 +268,11 @@ const ValeAcademico = ()  =>{
                                         <div>
                                 <Typography variant="h12" >
                                     Funcionalidades: <Chip label="Login" className={classes.chip} onClick={ () => handleChip('Login') }/>
-                                    <Chip label="Fixa_Academica" className={classes.chip} onClick={ () => handleChip('Fixa_Academica') }/>
+                                    <Chip label="Inscricao" className={classes.chip} onClick={ () => handleChip('Inscricao') }/>
+                                    <Chip label="Renda" className={classes.chip} onClick={ () => handleChip('Renda') }/>
+                                    <Chip label="Familia" className={classes.chip} onClick={ () => handleChip('Familia') }/>
+
+
                                     
                                                                         
                                 </Typography>
